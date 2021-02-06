@@ -5,8 +5,8 @@ const Header = ({ tagline }) => (
     <h1>
       Catch
       <span className='ofThe'>
-        <span class='of'>Of</span>
-        <span class='the'>the</span>
+        <span className='of'>Of</span>
+        <span className='the'>the</span>
       </span>
       Day
     </h1>
