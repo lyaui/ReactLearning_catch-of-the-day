@@ -2,14 +2,10 @@ import React from 'react';
 import Header from './Header';
 import Inventory from './Inventory';
 import Order from './Order';
+import Fish from './Fish';
 import sampleFishes from '../sample-fishes';
 
 class App extends React.Component {
-  // 可以用constructor法來建立
-  // constructor() {
-  //   super();
-  //   this.state = {};
-  // }
   state = {
     fishes: {},
     order: {},
@@ -31,9 +27,14 @@ class App extends React.Component {
       <div className='catch-of-the-day'>
         <div className='menu'>
           <Header tagline='Fresh Seafood Market'></Header>
+          <ul className='fishes'>
+            {Object.keys(this.state.fishes).map((item) => (
+              <Fish key={item} details={this.state.fishes[item]}></Fish>
+            ))}
+          </ul>
         </div>
-        <Inventory addFish={this.addFish} loadSampleFishes={this.loadSampleFishes}></Inventory>
         <Order></Order>
+        <Inventory addFish={this.addFish} loadSampleFishes={this.loadSampleFishes}></Inventory>
       </div>
     );
   }
