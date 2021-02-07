@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Inventory from './Inventory';
 import Order from './Order';
+import sampleFishes from '../sample-fishes';
 
 class App extends React.Component {
   // 可以用constructor法來建立
@@ -22,13 +23,16 @@ class App extends React.Component {
     // 3. set the new fishes object to state
     this.setState({ fishes });
   };
+  loadSampleFishes = () => {
+    this.setState({ fishes: sampleFishes });
+  };
   render() {
     return (
       <div className='catch-of-the-day'>
         <div className='menu'>
           <Header tagline='Fresh Seafood Market'></Header>
         </div>
-        <Inventory addFish={this.addFish}></Inventory>
+        <Inventory addFish={this.addFish} loadSampleFishes={this.loadSampleFishes}></Inventory>
         <Order></Order>
       </div>
     );
