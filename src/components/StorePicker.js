@@ -9,7 +9,9 @@ class StorePicker extends React.Component {
   myInput = React.createRef();
   goToStore = (e) => {
     e.preventDefault();
-    console.log(this);
+    const storeName = this.myInput.current.value;
+    // 由 Router props 過來的資訊
+    this.props.history.push(`/store/${storeName}`);
   };
   render() {
     return (
@@ -17,8 +19,8 @@ class StorePicker extends React.Component {
         <form action='' className='store-selector' onSubmit={this.goToStore}>
           <h2>Hello</h2>
           <input
-            ref={this.myInput}
             type='text'
+            ref={this.myInput}
             required
             placeholder='Store Name'
             defaultValue={getFunName()}
