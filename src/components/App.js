@@ -4,12 +4,27 @@ import Inventory from './Inventory';
 import Order from './Order';
 import Fish from './Fish';
 import sampleFishes from '../sample-fishes';
+import base from '../base';
 
 class App extends React.Component {
   state = {
     fishes: {},
     order: {},
   };
+  // DOM已經掛載完成 ，在這個階段可以呼叫api來更新DOM ，適合做一些初始化的工作
+  componentDidMount() {
+    const { params } = this.props.match;
+    // refs in Firebase are sort of the reference to a piece of data in the database
+    this.ref = base.syncState(`${params.storeId}/fishes`, {
+      context: this,
+      state: 'fishes',
+    });
+  }
+  // 當一個 component 被從 DOM 中移除時，這個方法將會被呼叫：
+  componentWillUnmount() {
+    // 修正 memory leak 的問題
+    base.removeBinding(this.ref);
+  }
 
   addFish = (fish) => {
     // 1. Take a copy of the existing state
