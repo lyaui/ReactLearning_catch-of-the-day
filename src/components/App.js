@@ -14,13 +14,23 @@ class App extends React.Component {
   // DOM已經掛載完成 ，在這個階段可以呼叫api來更新DOM ，適合做一些初始化的工作
   componentDidMount() {
     const { params } = this.props.match;
+    // 訂單
+    const localStorageRef = localStorage.getItem(params.storeId);
+    if (localStorageRef) this.setState({ order: JSON.parse(localStorageRef) });
+    // firebase menu
     // refs in Firebase are sort of the reference to a piece of data in the database
     this.ref = base.syncState(`${params.storeId}/fishes`, {
       context: this,
       state: 'fishes',
     });
   }
-  // 當一個 component 被從 DOM 中移除時，這個方法將會被呼叫：
+
+  // 感覺有點像 watch
+  componentDidUpdate() {
+    localStorage.setItem(this.props.match.params.storeId, JSON.stringify(this.state.order));
+  }
+
+  // 當一個 component 被從 DOM 中移除時，這個方法將會被呼叫
   componentWillUnmount() {
     // 修正 memory leak 的問題
     base.removeBinding(this.ref);

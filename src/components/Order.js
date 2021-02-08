@@ -5,6 +5,8 @@ class Order extends React.Component {
   // 因為全寫在render太多太雜了，所以拆出來寫
   renderOrder = (key) => {
     const { fishes, order } = this.props;
+    // make sure the fish is loaded before we continue
+    if (!Object.keys(fishes).length) return;
     const fish = fishes[key];
     const count = order[key];
     const isAvailable = fish.status === 'available';
@@ -18,6 +20,8 @@ class Order extends React.Component {
   };
   render() {
     const { fishes, order } = this.props;
+    // make sure the fish is loaded before we continue
+    if (!Object.keys(fishes).length) return null;
     const orderIds = Object.keys(order);
     const total = orderIds.reduce((prevTotal, key) => {
       const fishPrice = fishes[key].price;
