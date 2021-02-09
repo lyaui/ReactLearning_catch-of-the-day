@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Header from './Header';
 import Inventory from './Inventory';
 import Order from './Order';
@@ -11,6 +12,11 @@ class App extends React.Component {
     fishes: {},
     order: {},
   };
+
+  static propTypes = {
+    match: PropTypes.object,
+  };
+
   // DOM已經掛載完成 ，在這個階段可以呼叫api來更新DOM ，適合做一些初始化的工作
   componentDidMount() {
     const { params } = this.props.match;
@@ -81,7 +87,7 @@ class App extends React.Component {
     return (
       <div className='catch-of-the-day'>
         <div className='menu'>
-          <Header tagline='Fresh Seafood Market'></Header>
+          <Header tagline={'Fresh Seafood Market'}></Header>
           <ul className='fishes'>
             {Object.keys(this.state.fishes).map((item) => (
               <Fish

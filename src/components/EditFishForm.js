@@ -1,6 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class EditFishForm extends React.Component {
+  static propTypes = {
+    updateState: PropTypes.func,
+    fish: PropTypes.shape({
+      name: PropTypes.string,
+      price: PropTypes.number,
+      status: PropTypes.string,
+      desc: PropTypes.string,
+      image: PropTypes.string,
+    }),
+    index: PropTypes.string,
+  };
+
   handleChange = (e) => {
     // update that fish
     // if there are duplicate keys the order of the spread opperator does matter.
