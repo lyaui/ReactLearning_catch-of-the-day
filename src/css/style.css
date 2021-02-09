@@ -50,6 +50,9 @@
   -webkit-transform: translateY(-100%) scale(3);
           transform: translateY(-100%) scale(3);
 }
+.order-enter {
+  background: #f00;
+}
 @font-face {
   font-family: "haymakerregular";
   src: url("./fonts/haymaker-webfont.eot");
@@ -520,7 +523,7 @@ input[type=submit] {
   border: 1px solid #000;
   font-weight: 600;
   font-size: 1.5rem;
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', sans-serif;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
   position: relative;
