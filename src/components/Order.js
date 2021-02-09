@@ -10,11 +10,13 @@ class Order extends React.Component {
     const fish = fishes[key];
     const count = order[key];
     const isAvailable = fish.status === 'available';
-    if (!isAvailable)
+    if (!isAvailable) {
       return <li key={key}>Sorry {fish ? fish.name : 'fish'} is no longer available.</li>;
+    }
     return (
       <li key={key}>
         {count} lbs {fish.name} {formatPrice(count * fish.price)}
+        <button onClick={() => this.props.deleteOrder(key)}>&times;</button>
       </li>
     );
   };
@@ -24,10 +26,10 @@ class Order extends React.Component {
     if (!Object.keys(fishes).length) return null;
     const orderIds = Object.keys(order);
     const total = orderIds.reduce((prevTotal, key) => {
-      const fishPrice = fishes[key].price;
-      const fishCount = order[key];
+      const fish = fishes[key];
+      const count = order[key];
       const isAvailable = fishes[key] && fishes[key].status === 'available';
-      if (isAvailable) prevTotal += fishPrice * fishCount;
+      if (isAvailable) prevTotal += fish.price * count;
       return prevTotal;
     }, 0);
     return (
